@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MDASProject</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="button_login">Login</string>
+    <string name="button_create_an_account">Create an Account</string>
+</resources>
