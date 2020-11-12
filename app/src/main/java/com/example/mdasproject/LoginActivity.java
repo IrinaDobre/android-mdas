@@ -37,19 +37,22 @@ public class LoginActivity extends AppCompatActivity {
 
 
         btnLogin.setOnClickListener(v -> {
-            if (validate()) {
-                if (validateEmail(etEmail.getText().toString())) {
-                    etEmail.setError(null);
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl("http://10.0.2.2:8081/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                    retrofitClient = retrofit.create(RetrofitClient.class);
-                    authenticateUser();
-                } else {
-                    etEmail.setError("Please enter a valid email format");
-                }
-            }
+//            if (validate()) {
+//                if (validateEmail(etEmail.getText().toString())) {
+//                    etEmail.setError(null);
+//                    Retrofit retrofit = new Retrofit.Builder()
+//                            .baseUrl("http://10.0.2.2:8081/")
+//                            .addConverterFactory(GsonConverterFactory.create())
+//                            .build();
+//                    retrofitClient = retrofit.create(RetrofitClient.class);
+//                    authenticateUser();
+//                } else {
+//                    etEmail.setError("Please enter a valid email format");
+//                }
+//            }
+
+            Intent intent = new Intent(LoginActivity.this, CategoriesActivity.class);
+            startActivity(intent);
         });
 
         btnCreateAccount.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));

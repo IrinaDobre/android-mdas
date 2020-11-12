@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="#303030">
+    android:background="@color/white">
 
     <com.google.android.material.appbar.AppBarLayout
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -44,7 +44,7 @@
                         android:layout_height="220dp"
                         android:fitsSystemWindows="true"
                         android:background="@drawable/load"
-                        android:id="@+id/aa_thumbnail"
+                        android:id="@+id/thumbnail"
                         android:scaleType="fitCenter"/>
 
                 </LinearLayout>
@@ -62,20 +62,20 @@
                         android:text="author"
                         android:textSize="25sp"
                         android:layout_marginTop="5dp"
-                        android:id="@+id/aa_author"/>
+                        android:id="@+id/author"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Publish Date"
                         android:textSize="15sp"
                         android:layout_marginTop="5dp"
-                        android:id="@+id/aa_publish_date"/>
+                        android:id="@+id/publishDate"/>
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/aa_price"
+                        android:id="@+id/price"
                         android:text="Price"
                         android:layout_marginTop="20dp"
                         android:textColor="#fff"
@@ -114,7 +114,7 @@
     android:orientation="vertical"
     android:padding="10dp">
         <TextView
-            android:textColor="#fff"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:text="Description"
             android:layout_marginTop="6dp"
@@ -125,23 +125,51 @@
             />
 
         <TextView
-            android:textColor="#fff"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:text="Book Description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/aa_description"/>
+            android:id="@+id/description"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/star"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/star"
         app:layout_anchor="@id/appBarLayout"
         app:layout_anchorGravity="bottom|end"
         android:layout_marginEnd="25dp"
         app:maxImageSize="28dp"
-        android:tint="@color/purple_200"/>
+        app:backgroundTint="#9575CD" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/favFAB"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/star"
+        app:layout_anchor="@id/appBarLayout"
+        app:layout_anchorGravity="bottom|end"
+        android:layout_marginEnd="25dp"
+        app:maxImageSize="28dp"
+        app:backgroundTint="#9575CD" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cartFAB"
+        app:tint="@color/white"
+        app:srcCompat="@drawable/shoppingcart"
+        app:layout_anchor="@id/appBarLayout"
+        app:layout_anchorGravity="bottom|end"
+        android:layout_marginEnd="90dp"
+        app:maxImageSize="30dp"
+        app:backgroundTint="#FFAB91" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

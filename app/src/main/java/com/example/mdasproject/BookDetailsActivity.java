@@ -13,42 +13,47 @@ import android.widget.Toolbar;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookDetailsActivity extends AppCompatActivity {
+    FloatingActionButton favFAB;
+    FloatingActionButton cartFAB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
 
+        favFAB = findViewById(R.id.favFAB);
+        cartFAB = findViewById(R.id.cartFAB);
+
         getSupportActionBar().setTitle("");
 
         Bundle extras = getIntent().getExtras();
-        String title ="", authors ="", description="", publishDate="", info ="",
-                buy ="", thumbnail ="";
-
+        String title ="", authors ="", description="", publishDate="", price ="", thumbnail ="";
 
         if(extras != null){
-            title = extras.getString("book_title");
-            authors = extras.getString("book_author");
-            description = extras.getString("book_desc");
-            publishDate = extras.getString("book_publish_date");
-            thumbnail = extras.getString("book_thumbnail");
+            title = extras.getString("bookTitle");
+            authors = extras.getString("bookAuthor");
+            description = extras.getString("bookDesc");
+            publishDate = extras.getString("bookPublishDate");
+            thumbnail = extras.getString("bookThumbnail");
+            price = extras.getString("bookPrice");
         }
 
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
         collapsingToolbarLayout.setTitleEnabled(true);
 
-        TextView tvAuthors = findViewById(R.id.aa_author);
-        TextView tvDesc = findViewById(R.id.aa_description);
-        TextView tvPublishDate = findViewById(R.id.aa_publish_date);
-
-        ImageView ivThumbnail = findViewById(R.id.aa_thumbnail);
+        TextView tvAuthors = findViewById(R.id.author);
+        TextView tvDesc = findViewById(R.id.description);
+        TextView tvPublishDate = findViewById(R.id.publishDate);
+        TextView tvPrice = findViewById(R.id.price);
+        ImageView ivThumbnail = findViewById(R.id.thumbnail);
 
         tvAuthors.setText(authors);
         tvDesc.setText(description);
         tvPublishDate.setText(publishDate);
-
+        tvPrice.setText(price);
 
         collapsingToolbarLayout.setTitle(title);
 

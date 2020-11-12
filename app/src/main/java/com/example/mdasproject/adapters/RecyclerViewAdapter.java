@@ -50,17 +50,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Intent i = new Intent(mContext , BookDetailsActivity.class);
                 int pos = viewHolder.getAdapterPosition();
-                i.putExtra("book_title" ,mData.get(pos).getTitle());
-                i.putExtra("book_author" ,mData.get(pos).getAuthors());
-                i.putExtra("book_desc" ,mData.get(pos).getDescription());
-//                i.putExtra("book_pageCount" ,mData.get(pos).getPageCount());
-                i.putExtra("book_publish_date" ,mData.get(pos).getPublishedDate());
-                i.putExtra("book_info" ,mData.get(pos).getUrl());
-                i.putExtra("book_buy" ,mData.get(pos).getBuy());
-                i.putExtra("book_preview" ,mData.get(pos).getPreview());
-                i.putExtra("book_thumbnail" ,mData.get(pos).getThumbnail());
-
-
+                i.putExtra("bookTitle" ,mData.get(pos).getTitle());
+                i.putExtra("bookAuthor" ,mData.get(pos).getAuthors());
+                i.putExtra("bookDesc" ,mData.get(pos).getDescription());
+                i.putExtra("bookPublishDate" ,mData.get(pos).getPublishedDate());
+                i.putExtra("bookThumbnail" ,mData.get(pos).getThumbnail());
+                i.putExtra("bookPrice", mData.get(pos).getPrice());
                 mContext.startActivity(i);
             }
         });
@@ -96,11 +91,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-
         CardView cardViewHolder;
         ImageView ivThumbnail ;
-        TextView tvTitle , tvPrice , tvAuthor;
-        LinearLayout container ;
+        TextView tvTitle, tvPrice, tvAuthor;
+        LinearLayout container;
+
         public MyViewHolder(View itemView) {
             super(itemView);
 
@@ -110,7 +105,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             tvPrice = itemView.findViewById(R.id.price);
             container = itemView.findViewById(R.id.container);
             cardViewHolder = itemView.findViewById(R.id.cardViewHolder);
-
         }
     }
 }

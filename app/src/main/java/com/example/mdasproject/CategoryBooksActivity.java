@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 //import com.android.volley.Request;
@@ -31,6 +32,7 @@ public class CategoryBooksActivity extends AppCompatActivity {
     private List<Book> categoryBooks = new ArrayList<>();
     private RecyclerView recyclerView;
     private RecyclerViewAdapter booksAdapter;
+    private ProgressBar progressBar;
     String pressed;
 
     @Override
@@ -38,6 +40,7 @@ public class CategoryBooksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_books);
 
+        progressBar = findViewById(R.id.loadingIndicator);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -48,6 +51,7 @@ public class CategoryBooksActivity extends AppCompatActivity {
         Log.d("PRESSED RECEIVED", pressed);
 
         getSupportActionBar().setTitle(pressed.toUpperCase());
+
 
         new FetchBooks().execute(pressed);
 
@@ -62,6 +66,12 @@ public class CategoryBooksActivity extends AppCompatActivity {
 //    List<Book> categoryBooks = new ArrayList<>();
 
         public FetchBooks() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressBar.setVisibility(View.VISIBLE);
         }
 
         @Override
@@ -83,7 +93,7 @@ public class CategoryBooksActivity extends AppCompatActivity {
             int pageCount = 1000;
             String categories = "No categories available ";
             String buy = "";
-            String price = "NOT_FOR_SALE";
+            String price = "Currently not available";
             String previewLink = "";
             String url = "";
 
@@ -164,8 +174,11 @@ public class CategoryBooksActivity extends AppCompatActivity {
                     categoryBooks.add(new Book(title, author, publishedDate, description,
                             categories, thumbnail, buy, previewLink, price, pageCount, url));
 
+
+                    progressBar.setVisibility(View.GONE);
                     booksAdapter = new RecyclerViewAdapter(CategoryBooksActivity.this, categoryBooks);
                     recyclerView.setAdapter(booksAdapter);
+
 
                 }
             } catch (JSONException e) {

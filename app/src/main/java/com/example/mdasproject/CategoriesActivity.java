@@ -41,49 +41,49 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         Intent intent;
         switch (view.getId()){
             case R.id.historyCard:
-                Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "history");
                 startActivity(intent);
                 break;
             case R.id.artCard:
-                Toast.makeText(getApplicationContext(), "Art", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Art", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "art");
                 startActivity(intent);
                 break;
             case R.id.scienceCard:
-                Toast.makeText(getApplicationContext(), "Science", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Science", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "science");
                 startActivity(intent);
                 break;
             case R.id.businessCard:
-                Toast.makeText(getApplicationContext(), "Business", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Business", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "business");
                 startActivity(intent);
                 break;
             case R.id.bioCard:
-                Toast.makeText(getApplicationContext(), "Biography", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Biography", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "biography");
                 startActivity(intent);
                 break;
             case R.id.medicalCard:
-                Toast.makeText(getApplicationContext(), "Medical", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Medical", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "medical");
                 startActivity(intent);
                 break;
             case R.id.travelCard:
-                Toast.makeText(getApplicationContext(), "Travel", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Travel", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "travel");
                 startActivity(intent);
                 break;
             case R.id.scifiCard:
-                Toast.makeText(getApplicationContext(), "Sci-Fi", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Sci-Fi", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "scifi");
                 startActivity(intent);
