@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
@@ -76,8 +77,7 @@ public class BookDetailsActivity extends AppCompatActivity {
             cartItem.setTotalPrice(19.6); //Double.valueOf(tvPrice.getText().toString())
             //cartItem.setImageBook();
             User.shoppingList.add(cartItem);
-            Intent i = new Intent(this, ShoppingCartActivity.class);
-            startActivity(i);
+            Toast.makeText(getApplicationContext(), "The book was added to your shopping cart", Toast.LENGTH_SHORT).show();
         });
     }
 

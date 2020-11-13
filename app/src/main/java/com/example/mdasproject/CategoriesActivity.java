@@ -1,16 +1,30 @@
 package com.example.mdasproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener {
+import androidx.appcompat.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
+
+public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private CardView historyCard, artCard, scienceCard, scifiCard, businessCard,
             biographyCard, travelCard, medicalCard;
+
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
+    //private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +48,17 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         biographyCard.setOnClickListener(this);
         travelCard.setOnClickListener(this);
         medicalCard.setOnClickListener(this);
+
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_menu);
+
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle );
+        toggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -91,6 +116,35 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        switch(item.getItemId()) {
+            case R.id.nav_fav_list :
+                Toast.makeText(getApplicationContext(),"Lista Favorite", Toast.LENGTH_LONG).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_shopping_cart :
+                Toast.makeText(getApplicationContext(),"Lista Cumparaturi", Toast.LENGTH_LONG).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                Intent i = new Intent(this, ShoppingCartActivity.class);
+                startActivity(i);
+                break;
+            case R.id.nav_settings :
+                Toast.makeText(getApplicationContext(),"Setari", Toast.LENGTH_LONG).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.nav_logout :
+                Toast.makeText(getApplicationContext(),"Logout", Toast.LENGTH_LONG).show();
+                drawerLayout.closeDrawer(GravityCompat.START);
+                break;
+        }
+
+        return true;
+    }
 }
