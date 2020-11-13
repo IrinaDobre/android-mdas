@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,12 +22,14 @@ import com.example.mdasproject.R;
 import com.example.mdasproject.classes.Book;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> implements Filterable {
     private Context mContext;
     private List<Book> mData;
     private RequestOptions options;
+    List<Book> mDataAll;
 
     public RecyclerViewAdapter() {
         this.mData = new ArrayList<>();
@@ -34,6 +38,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public RecyclerViewAdapter(Context mContext, List<Book> mData) {
         this.mContext = mContext;
         this.mData = mData;
+        this.mDataAll = new ArrayList<>(mData);
 
         options = new RequestOptions().centerCrop().placeholder(R.drawable.load).error(R.drawable.load);
     }
@@ -89,6 +94,42 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public int getItemCount() {
         return mData.size();
     }
+
+    @Override
+    public Filter getFilter() {
+
+        return filter;
+    }
+
+    Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<Book> filteredList = new ArrayList<>();
+            if(charSequence.toString().isEmpty()){
+                filteredList.addAll(mDataAll);
+            }
+            else {
+                for(Book b: mDataAll){
+                    if(b.getTitle().toLowerCase().contains(charSequence.toString().toLowerCase()) ||
+                            b.getAuthors().toLowerCase().contains(charSequence.toString().toLowerCase())){
+                        filteredList.add(b);
+                    }
+                }
+            }
+
+            FilterResults filterResults = new FilterResults();
+            filterResults.values = filteredList;
+
+            return filterResults;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            mData.clear();
+            mData.addAll((Collection<? extends Book>) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         CardView cardViewHolder;
