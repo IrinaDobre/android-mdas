@@ -12,12 +12,19 @@ import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.mdasproject.classes.ShoppingCartItem;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BookDetailsActivity extends AppCompatActivity {
     FloatingActionButton favFAB;
     FloatingActionButton cartFAB;
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    TextView tvAuthors;
+    TextView tvDesc;
+    TextView tvPublishDate;
+    TextView tvPrice;
+    ImageView ivThumbnail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +48,14 @@ public class BookDetailsActivity extends AppCompatActivity {
             price = extras.getString("bookPrice");
         }
 
-        CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
+        collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
         collapsingToolbarLayout.setTitleEnabled(true);
 
-        TextView tvAuthors = findViewById(R.id.author);
-        TextView tvDesc = findViewById(R.id.description);
-        TextView tvPublishDate = findViewById(R.id.publishDate);
-        TextView tvPrice = findViewById(R.id.price);
-        ImageView ivThumbnail = findViewById(R.id.thumbnail);
+        tvAuthors = findViewById(R.id.author);
+        tvDesc = findViewById(R.id.description);
+        tvPublishDate = findViewById(R.id.publishDate);
+        tvPrice = findViewById(R.id.price);
+        ivThumbnail = findViewById(R.id.thumbnail);
 
         tvAuthors.setText(authors);
         tvDesc.setText(description);
@@ -60,6 +67,18 @@ public class BookDetailsActivity extends AppCompatActivity {
         RequestOptions requestOptions = new RequestOptions().centerCrop().placeholder(R.drawable.load).error(R.drawable.load);
 
         Glide.with(this).load(thumbnail).apply(requestOptions).into(ivThumbnail);
+
+        cartFAB.setOnClickListener(v -> {
+            ShoppingCartItem cartItem = new ShoppingCartItem();
+            cartItem.setTitle(collapsingToolbarLayout.getTitle().toString());
+            cartItem.setAuthors(tvAuthors.getText().toString());
+            cartItem.setQuantity(1);
+            cartItem.setTotalPrice(19.6); //Double.valueOf(tvPrice.getText().toString())
+            //cartItem.setImageBook();
+            User.shoppingList.add(cartItem);
+            Intent i = new Intent(this, ShoppingCartActivity.class);
+            startActivity(i);
+        });
     }
 
 }
