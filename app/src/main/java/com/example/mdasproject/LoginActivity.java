@@ -9,7 +9,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mdasproject.classes.ShoppingCartItem;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -27,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnCreateAccount;
     private RetrofitClient retrofitClient;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
