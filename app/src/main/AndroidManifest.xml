@@ -19,13 +19,12 @@
         <activity android:name=".ShoppingCartActivity" />
         <activity android:name=".BookDetailsActivity" />
         <activity android:name=".CategoryBooksActivity" />
-        <activity android:name=".CategoriesActivity">
+        <activity android:name=".CategoriesActivity"/>
 
-            <!-- <activity android:name=".RegisterActivity" /> -->
-            <!-- <activity android:name=".LoginActivity"> -->
+             <activity android:name=".RegisterActivity" />
+             <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

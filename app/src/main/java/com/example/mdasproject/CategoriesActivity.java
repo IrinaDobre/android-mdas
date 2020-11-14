@@ -6,8 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +22,6 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle toggle;
     private NavigationView navigationView;
-    //private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,4 +148,6 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
 
         return true;
     }
+
+
 }

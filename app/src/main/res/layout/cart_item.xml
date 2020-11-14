@@ -16,7 +16,7 @@
         <LinearLayout
             android:id="@+id/containerCart"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="155dp"
             android:layout_marginTop="3dp"
             android:padding="10dp">
 
@@ -128,13 +128,13 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/imgDeleteShoppingItem"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="90dp"
             android:layout_marginEnd="20dp"
             android:clickable="true"
-            android:onClick="favoriteIconClicked"
             android:src="@drawable/trash" />
 
     </RelativeLayout>

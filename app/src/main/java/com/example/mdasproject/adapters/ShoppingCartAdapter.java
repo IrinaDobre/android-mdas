@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -58,6 +59,31 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         if (shoppingCartItem.getImageBook() != null) {
             Glide.with(mContext).load(shoppingCartItem.getImageBook()).apply(options).into(holder.ivImageBook);
         }
+
+        holder.tvIncreaseQty.setOnClickListener((v) -> {
+            ShoppingCartItem s = shoppingList.get(i);
+            s.setQuantity(s.getQuantity() + 1);
+            s.setTotalPrice(s.getQuantity() * s.getInitialPrice());
+            notifyDataSetChanged();
+            holder.tvQuantity.setText(String.valueOf(s.getQuantity()));
+        });
+
+        holder.tvDecreaseQty.setOnClickListener((v) -> {
+            ShoppingCartItem s = shoppingList.get(i);
+            if (s.getQuantity() - 1 < 0) {
+                Toast.makeText(mContext, "Quantity cannot be negative", Toast.LENGTH_SHORT).show();
+            } else {
+                s.setQuantity(s.getQuantity() - 1);
+                s.setTotalPrice(s.getQuantity() * s.getInitialPrice());
+                notifyDataSetChanged();
+                holder.tvQuantity.setText(String.valueOf(s.getQuantity()));
+            }
+        });
+
+        holder.imgDeleteShoppingItem.setOnClickListener((v) -> {
+            shoppingList.remove(i);
+            notifyDataSetChanged();
+        });
     }
 
     @Override
@@ -68,8 +94,8 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
         CardView cardViewHolder;
-        ImageView ivImageBook ;
-        TextView tvTitle, tvTotalPrice, tvAuthor, tvQuantity;
+        ImageView ivImageBook, imgDeleteShoppingItem;
+        TextView tvTitle, tvTotalPrice, tvAuthor, tvQuantity, tvIncreaseQty, tvDecreaseQty;
         LinearLayout container ;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -79,8 +105,13 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             tvAuthor = itemView.findViewById(R.id.authorCart);
             tvTotalPrice = itemView.findViewById(R.id.totalPrice);
             tvQuantity = itemView.findViewById(R.id.quantityCart);
+            tvIncreaseQty = itemView.findViewById(R.id.IncreaseQty);
+            tvDecreaseQty = itemView.findViewById(R.id.DecreaseQty);
+            imgDeleteShoppingItem = itemView.findViewById(R.id.imgDeleteShoppingItem);
             container = itemView.findViewById(R.id.containerCart);
             cardViewHolder = itemView.findViewById(R.id.cardViewHolderShoppingCart);
         }
+
+
     }
 }

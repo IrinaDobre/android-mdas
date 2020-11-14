@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/nav_fav_list" android:title="Favorites List"
+    <item android:id="@+id/nav_fav_list"
+        android:title="Favorites List"
+        android:icon="@drawable/ic_favorite_icon_32"
        />
 
-    <item android:id="@+id/nav_shopping_cart" android:title="Shopping Cart"
+    <item android:id="@+id/nav_shopping_cart"
+        android:title="Shopping Cart"
+        android:icon="@drawable/ic_shopping_icon_32"
         />
 
-    <item android:id="@+id/nav_settings" android:title="Settings"
+    <item android:id="@+id/nav_settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings_icon_32"
         />
 
 
-    <item android:id="@+id/nav_logout" android:title="Logout"
+    <item android:id="@+id/nav_logout"
+        android:title="Logout"
+        android:icon="@drawable/ic_logout_icon_32"
         />
 </menu>

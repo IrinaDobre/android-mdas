@@ -1,17 +1,19 @@
 package com.example.mdasproject.classes;
 
 public class ShoppingCartItem {
+    private double initialPrice;
     private String title;
     private String authors;
     private int quantity;
     private double totalPrice;
     private String imageBook;
 
-    public ShoppingCartItem(){
+    public ShoppingCartItem() {
 
     }
 
-    public ShoppingCartItem(String title, String authors, int quantity, double totalPrice, String imageBook) {
+    public ShoppingCartItem(double initialPrice, String title, String authors, int quantity, double totalPrice, String imageBook) {
+        this.initialPrice = initialPrice;
         this.title = title;
         this.authors = authors;
         this.quantity = quantity;
@@ -59,13 +61,23 @@ public class ShoppingCartItem {
         this.imageBook = imageBook;
     }
 
+    public double getInitialPrice() {
+        return initialPrice;
+    }
+
+    public void setInitialPrice(double initialPrice) {
+        this.initialPrice = initialPrice;
+    }
+
     @Override
     public String toString() {
         return "ShoppingCartItem{" +
-                "title='" + title + '\'' +
+                "initialPrice=" + initialPrice +
+                ", title='" + title + '\'' +
                 ", authors='" + authors + '\'' +
                 ", quantity=" + quantity +
                 ", totalPrice=" + totalPrice +
+                ", imageBook='" + imageBook + '\'' +
                 '}';
     }
 }
