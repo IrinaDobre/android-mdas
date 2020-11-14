@@ -69,13 +69,14 @@ public class BookDetailsActivity extends AppCompatActivity {
 
         Glide.with(this).load(thumbnail).apply(requestOptions).into(ivThumbnail);
 
+        String finalThumbnail = thumbnail;
         cartFAB.setOnClickListener(v -> {
             ShoppingCartItem cartItem = new ShoppingCartItem();
             cartItem.setTitle(collapsingToolbarLayout.getTitle().toString());
             cartItem.setAuthors(tvAuthors.getText().toString());
             cartItem.setQuantity(1);
             cartItem.setTotalPrice(19.6); //Double.valueOf(tvPrice.getText().toString())
-            //cartItem.setImageBook();
+            cartItem.setImageBook(finalThumbnail);
             User.shoppingList.add(cartItem);
             Toast.makeText(getApplicationContext(), "The book was added to your shopping cart", Toast.LENGTH_SHORT).show();
         });

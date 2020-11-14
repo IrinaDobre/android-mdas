@@ -1,6 +1,7 @@
 package com.example.mdasproject.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         holder.tvTitle.setText(shoppingCartItem.getTitle());
         holder.tvAuthor.setText(shoppingCartItem.getAuthors());
         holder.tvTotalPrice.setText(Double.toString(shoppingCartItem.getTotalPrice()));
+        holder.tvQuantity.setText(Integer.toString(shoppingCartItem.getQuantity()));
 
         if (shoppingCartItem.getImageBook() != null) {
             Glide.with(mContext).load(shoppingCartItem.getImageBook()).apply(options).into(holder.ivImageBook);
@@ -72,11 +74,11 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            ivImageBook = itemView.findViewById(R.id.thumbnail);
+            ivImageBook = itemView.findViewById(R.id.imageBookCart);
             tvTitle = itemView.findViewById(R.id.titleCart);
             tvAuthor = itemView.findViewById(R.id.authorCart);
             tvTotalPrice = itemView.findViewById(R.id.totalPrice);
-            //tvQuantity = itemView.findViewById(R.id.quantityCart);
+            tvQuantity = itemView.findViewById(R.id.quantityCart);
             container = itemView.findViewById(R.id.containerCart);
             cardViewHolder = itemView.findViewById(R.id.cardViewHolderShoppingCart);
         }

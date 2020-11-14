@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.example.mdasproject.adapters.RecyclerViewAdapter;
 import com.example.mdasproject.adapters.ShoppingCartAdapter;
 import com.example.mdasproject.classes.Book;
+import com.example.mdasproject.classes.ShoppingCartItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,10 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
         shoppingCartAdapter = new ShoppingCartAdapter(this, User.shoppingList);
         recyclerView.setAdapter(shoppingCartAdapter);
+
+
+
+
 
     }
 }
