@@ -123,21 +123,25 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
+        Intent intent;
         switch(item.getItemId()) {
             case R.id.nav_fav_list :
                 Toast.makeText(getApplicationContext(),"Lista Favorite", Toast.LENGTH_LONG).show();
                 drawerLayout.closeDrawer(GravityCompat.START);
+                intent = new Intent(this, FavoritesListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_shopping_cart :
                 Toast.makeText(getApplicationContext(),"Lista Cumparaturi", Toast.LENGTH_LONG).show();
                 drawerLayout.closeDrawer(GravityCompat.START);
-                Intent i = new Intent(this, ShoppingCartActivity.class);
-                startActivity(i);
+                intent = new Intent(this, ShoppingCartActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_settings :
                 Toast.makeText(getApplicationContext(),"Setari", Toast.LENGTH_LONG).show();
                 drawerLayout.closeDrawer(GravityCompat.START);
+                intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_logout :
                 Toast.makeText(getApplicationContext(),"Logout", Toast.LENGTH_LONG).show();

@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MDASProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ShoppingCartActivity"></activity>
+        <activity android:name=".CartDetailsActivity"/>
+        <activity android:name=".FavoritesListActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".ShoppingCartActivity" />
         <activity android:name=".BookDetailsActivity" />
         <activity android:name=".CategoryBooksActivity" />
         <activity android:name=".CategoriesActivity">

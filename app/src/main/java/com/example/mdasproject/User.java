@@ -1,5 +1,6 @@
 package com.example.mdasproject;
 
+import com.example.mdasproject.classes.Book;
 import com.example.mdasproject.classes.ShoppingCartItem;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class User {
     private String name;
     private String address;
     public static List<ShoppingCartItem> shoppingList = new ArrayList<>();
+    public static List<Book> favListBook = new ArrayList<>();
 
     public int getId() {
         return id;

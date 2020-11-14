@@ -13,6 +13,7 @@ import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.mdasproject.classes.Book;
 import com.example.mdasproject.classes.ShoppingCartItem;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,15 +39,17 @@ public class BookDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         Bundle extras = getIntent().getExtras();
-        String title ="", authors ="", description="", publishDate="", price ="", thumbnail ="";
+        String title = "", authors = "", description = "", publishDate = "", price = "", thumbnail = "";
+        int fromFavList = 0;
 
-        if(extras != null){
+        if (extras != null) {
             title = extras.getString("bookTitle");
             authors = extras.getString("bookAuthor");
             description = extras.getString("bookDesc");
             publishDate = extras.getString("bookPublishDate");
             thumbnail = extras.getString("bookThumbnail");
             price = extras.getString("bookPrice");
+            fromFavList = extras.getInt("favScreen");
         }
 
         collapsingToolbarLayout = findViewById(R.id.collapsingToolbar);
@@ -70,6 +73,25 @@ public class BookDetailsActivity extends AppCompatActivity {
         Glide.with(this).load(thumbnail).apply(requestOptions).into(ivThumbnail);
 
         String finalThumbnail = thumbnail;
+        if (fromFavList == 1) {
+            favFAB.setVisibility(View.GONE);
+        } else {
+            favFAB.setVisibility(View.VISIBLE);
+
+            favFAB.setOnClickListener(v -> {
+                Book favBook = new Book();
+                favBook.setAuthors(tvAuthors.getText().toString());
+                favBook.setTitle(collapsingToolbarLayout.getTitle().toString());
+                favBook.setDescription(tvDesc.getText().toString());
+                favBook.setPublishedDate(tvPublishDate.getText().toString());
+                favBook.setPrice(tvPrice.getText().toString());
+                favBook.setThumbnail(finalThumbnail);
+                User.favListBook.add(favBook);
+                Toast.makeText(getApplicationContext(), "The book was added to your 'Favorites List'", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+
         cartFAB.setOnClickListener(v -> {
             ShoppingCartItem cartItem = new ShoppingCartItem();
             cartItem.setTitle(collapsingToolbarLayout.getTitle().toString());
@@ -80,6 +102,9 @@ public class BookDetailsActivity extends AppCompatActivity {
             User.shoppingList.add(cartItem);
             Toast.makeText(getApplicationContext(), "The book was added to your shopping cart", Toast.LENGTH_SHORT).show();
         });
+
+
     }
+
 
 }

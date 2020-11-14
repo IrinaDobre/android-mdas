@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mdasproject.BookDetailsActivity;
+import com.example.mdasproject.FavoritesListActivity;
 import com.example.mdasproject.R;
 import com.example.mdasproject.classes.Book;
 
@@ -61,6 +62,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 i.putExtra("bookPublishDate" ,mData.get(pos).getPublishedDate());
                 i.putExtra("bookThumbnail" ,mData.get(pos).getThumbnail());
                 i.putExtra("bookPrice", mData.get(pos).getPrice());
+                if(mContext instanceof FavoritesListActivity)  {
+                    i.putExtra("favScreen", 1);
+                }
                 mContext.startActivity(i);
             }
         });
