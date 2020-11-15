@@ -1,4 +1,4 @@
-package com.example.mdasproject;
+package com.example.mdasproject.classes;
 
 import com.example.mdasproject.classes.Book;
 import com.example.mdasproject.classes.ShoppingCartItem;

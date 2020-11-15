@@ -2,19 +2,17 @@ package com.example.mdasproject;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mdasproject.classes.Book;
 import com.example.mdasproject.classes.ShoppingCartItem;
+import com.example.mdasproject.classes.User;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,7 +74,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
                     user.setUsername(email);
+                    user.setAddress(response.body().getAddress());
+                    user.setName(response.body().getName());
                     getUserShoppingItems(email);
+                    getUserFavoriteItems(email);
                     Intent intent = new Intent(LoginActivity.this, CategoriesActivity.class);
                     startActivity(intent);
                 }
@@ -109,6 +110,26 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<ShoppingCartItem>> call, Throwable t) {
                 Toast.makeText(LoginActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void getUserFavoriteItems(String userEmail) {
+        Call<List<Book>> call = retrofitClient.getFavoriteItems(userEmail);
+        call.enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                if(response.code() == 200) {
+                    User.favListBook.clear();
+                    if(response.body() != null) {
+                        User.favListBook.addAll(response.body());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

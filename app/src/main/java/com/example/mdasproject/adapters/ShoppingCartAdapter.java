@@ -1,7 +1,7 @@
 package com.example.mdasproject.adapters;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +10,30 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.mdasproject.LoginActivity;
 import com.example.mdasproject.R;
+import com.example.mdasproject.RetrofitClient;
 import com.example.mdasproject.classes.ShoppingCartItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.MyViewHolder> {
     private Context mContext;
     private List<ShoppingCartItem> shoppingList;
     private RequestOptions options;
+    private RetrofitClient retrofitClient;
 
     public ShoppingCartAdapter() {
         this.shoppingList = new ArrayList<>();
@@ -81,7 +89,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         });
 
         holder.imgDeleteShoppingItem.setOnClickListener((v) -> {
+            String title = shoppingList.get(i).getTitle();
             shoppingList.remove(i);
+            deleteShoppingItem(title);
             notifyDataSetChanged();
         });
     }
@@ -113,5 +123,27 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         }
 
 
+    }
+
+    public void deleteShoppingItem(String title) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8081/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        retrofitClient = retrofit.create(RetrofitClient.class);
+        Call<String> call = retrofitClient.deleteShoppingItem(LoginActivity.user.getUsername(),title);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.code() == 200) {
+                    Log.i("Delete shopping list item", "Success");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(mContext, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

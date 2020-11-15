@@ -79,6 +79,7 @@
                         android:textStyle="bold|italic" />
 
                     <TextView
+                        android:id="@+id/invoiceName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -87,6 +88,7 @@
                         android:textSize="18sp" />
 
                     <TextView
+                        android:id="@+id/invoiceAdress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
@@ -125,11 +127,12 @@
                         android:textStyle="bold|italic" />
 
                     <Button
+                        android:id="@+id/buttonCardDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:backgroundTint="#AF6DD8"
-                        android:text="Insert your card"></Button>
+                        android:text="Insert your card"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -161,6 +164,7 @@
                         android:textStyle="bold|italic" />
 
                     <TextView
+                        android:id="@+id/totalPriceToPay"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
@@ -173,9 +177,8 @@
             </androidx.cardview.widget.CardView>
         </GridLayout>
 
-
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/buttonProcessPayment"
             android:layout_width="199dp"
             android:layout_height="60dp"
             android:layout_marginLeft="110dp"

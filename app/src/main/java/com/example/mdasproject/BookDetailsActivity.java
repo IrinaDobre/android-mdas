@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mdasproject.classes.Book;
 import com.example.mdasproject.classes.ShoppingCartItem;
+import com.example.mdasproject.classes.User;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -21,6 +22,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 
 public class BookDetailsActivity extends AppCompatActivity {
     FloatingActionButton favFAB;
@@ -84,20 +86,30 @@ public class BookDetailsActivity extends AppCompatActivity {
             favFAB.setVisibility(View.VISIBLE);
 
             favFAB.setOnClickListener(v -> {
-                Book favBook = new Book();
-                favBook.setAuthors(tvAuthors.getText().toString());
-                favBook.setTitle(collapsingToolbarLayout.getTitle().toString());
-                favBook.setDescription(tvDesc.getText().toString());
-                favBook.setPublishedDate(tvPublishDate.getText().toString());
-                favBook.setPrice(tvPrice.getText().toString());
-                favBook.setThumbnail(finalThumbnail);
-                User.favListBook.add(favBook);
-                Toast.makeText(getApplicationContext(), "The book was added to your 'Favorites List'", Toast.LENGTH_SHORT).show();
+                if (User.favListBook.stream().anyMatch(item -> item.getTitle().equals(collapsingToolbarLayout.getTitle().toString()))) {
+                    Toast.makeText(getApplicationContext(), "The book is already in your shopping cart", Toast.LENGTH_SHORT).show();
+                } else {
+                    Retrofit retrofit = new Retrofit.Builder()
+                            .baseUrl("http://10.0.2.2:8081/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build();
+                    retrofitClient = retrofit.create(RetrofitClient.class);
+                    Book favBook = new Book();
+                    favBook.setAuthors(tvAuthors.getText().toString());
+                    favBook.setTitle(collapsingToolbarLayout.getTitle().toString());
+                    favBook.setDescription(tvDesc.getText().toString());
+                    favBook.setPublishedDate(tvPublishDate.getText().toString());
+                    favBook.setPrice(tvPrice.getText().toString());
+                    favBook.setThumbnail(finalThumbnail);
+                    addFavoriteItem(favBook);
+                    User.favListBook.add(favBook);
+                    Toast.makeText(getApplicationContext(), "The book was added to your 'Favorites List'", Toast.LENGTH_SHORT).show();
+                }
             });
         }
 
 
-        cartFAB.setOnClickListener(v -> {
+
             if (tvPrice.getText().toString().equals("Currently not available")) {
                 cartFAB.setVisibility(View.GONE);
             } else {
@@ -127,7 +139,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 });
             }
 
-        });
 
     }
 
@@ -151,6 +162,23 @@ public class BookDetailsActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void addFavoriteItem(Book book) {
+        Call<String> call = retrofitClient.addFavoriteItem(LoginActivity.user.getUsername(), book);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.code() == 200) {
+                    Log.i("Favorite liste call to add item", "Succes");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 

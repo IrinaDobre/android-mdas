@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back"
-    tools:context=".SettingsActivity">
-
+    tools:context=".CardDetailsActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -24,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="Account Settings"
+            android:text="Card Details"
             android:textColor="@color/white"
             android:textSize="30sp"
             android:textStyle="bold"
@@ -68,77 +68,101 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/labelEmailSettings"
+                    android:id="@+id/labelCardNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:text="Email"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/editTextEmailAddressSettings"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="64dp"
+                    android:text="Card number"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/editTextEmailAddressSettings"
-                    android:layout_width="302dp"
+                    android:id="@+id/editTextCardNumber"
+                    android:layout_width="280dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:ems="10"
-                    android:hint="name.firstname@gmail.com"
-                    android:inputType="textEmailAddress"
+                    android:hint="1234 5678 9234 1237"
+                    android:maxLength="16"
+                    android:inputType="numberDecimal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/labelEmailSettings" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/labelCardNumber" />
 
                 <TextView
-                    android:id="@+id/labelNameSettings"
+                    android:id="@+id/labelExpirationDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="32dp"
-                    android:text="First Name &amp; Last Name"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
+                    android:text="Valid until"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/editTextEmailAddressSettings" />
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCardNumber" />
 
                 <EditText
-                    android:id="@+id/editTextNameSettings"
-                    android:layout_width="302dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
+                    android:id="@+id/editTextExpirationDate"
+                    android:layout_width="156dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:ems="10"
+                    android:hint="Month / Year"
+                    android:inputType="date"
+                    android:maxLength="5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/labelExpirationDate" />
+
+                <TextView
+                    android:id="@+id/labelCVV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="150dp"
+                    android:layout_marginTop="32dp"
+                    android:text="CVV"
+                    app:layout_constraintStart_toEndOf="@+id/labelExpirationDate"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextCardNumber" />
+
+                <EditText
+                    android:id="@+id/editTextCVV"
+                    android:layout_width="95dp"
+                    android:layout_height="41dp"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="34dp"
+                    android:ems="10"
+                    android:hint="123"
+                    android:inputType="numberPassword"
+                    android:textSize="18dp"
+                    android:maxLength="3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/editTextExpirationDate"
+                    app:layout_constraintTop_toBottomOf="@+id/labelCVV" />
+
+                <TextView
+                    android:id="@+id/labelCardHolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="32dp"
+                    android:text="Card holder"
+                    android:textSize="18dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextExpirationDate" />
+
+                <EditText
+                    android:id="@+id/editTextCardHolder"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="Your name and surname"
                     android:inputType="textPersonName"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/labelNameSettings" />
-
-                <TextView
-                    android:id="@+id/labelAdressSettings"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
-                    android:text="Adress"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextNameSettings" />
-
-                <EditText
-                    android:id="@+id/editTextAdressSettings"
-                    android:layout_width="302dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:inputType="textMultiLine"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/labelAdressSettings" />
+                    app:layout_constraintTop_toBottomOf="@+id/labelCardHolder" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -146,14 +170,15 @@
     </GridLayout>
 
     <Button
-        android:id="@+id/buttonUpdateSettings"
-        android:layout_width="249dp"
-        android:layout_height="68dp"
-        android:backgroundTint="#F1A384"
-        android:text="Update"
+        android:id="@+id/buttonSaveCardDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save Card Details"
+        android:backgroundTint="#AF6DD8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gridLayout" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

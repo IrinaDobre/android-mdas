@@ -15,6 +15,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import static com.example.mdasproject.classes.User.favListBook;
+import static com.example.mdasproject.classes.User.shoppingList;
+
 public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private CardView historyCard, artCard, scienceCard, scifiCard, businessCard,
             biographyCard, travelCard, medicalCard;
@@ -61,53 +64,62 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
         Intent intent;
+        int dontShowDeleteButton = 1;
         switch (view.getId()){
             case R.id.historyCard:
 //                Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "history");
+                intent.putExtra("dontShowDeleteButton", dontShowDeleteButton);
                 startActivity(intent);
                 break;
             case R.id.artCard:
 //                Toast.makeText(getApplicationContext(), "Art", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "art");
+                intent.putExtra("dontShowDeleteButton", dontShowDeleteButton);
                 startActivity(intent);
                 break;
             case R.id.scienceCard:
 //                Toast.makeText(getApplicationContext(), "Science", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "science");
+                intent.putExtra("dontShowDeleteButton", dontShowDeleteButton);
                 startActivity(intent);
                 break;
             case R.id.businessCard:
 //                Toast.makeText(getApplicationContext(), "Business", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "business");
+                intent.putExtra("dontShowDeleteButton", dontShowDeleteButton);
                 startActivity(intent);
                 break;
             case R.id.bioCard:
 //                Toast.makeText(getApplicationContext(), "Biography", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "biography");
+                intent.putExtra("dontShowDeleteButton", dontShowDeleteButton);
                 startActivity(intent);
                 break;
             case R.id.medicalCard:
 //                Toast.makeText(getApplicationContext(), "Medical", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "medical");
+                intent.putExtra("dontShowDeleteButton", dontShowDeleteButton);
                 startActivity(intent);
                 break;
             case R.id.travelCard:
 //                Toast.makeText(getApplicationContext(), "Travel", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "travel");
+                intent.putExtra("dontShowDeleteButton", dontShowDeleteButton);
                 startActivity(intent);
                 break;
             case R.id.scifiCard:
 //                Toast.makeText(getApplicationContext(), "Sci-Fi", Toast.LENGTH_SHORT).show();
                 intent = new Intent(getApplicationContext(), CategoryBooksActivity.class);
                 intent.putExtra("pressedCategory", "scifi");
+                intent.putExtra("dontShowDeleteButton", dontShowDeleteButton);
                 startActivity(intent);
                 break;
         }
@@ -123,16 +135,24 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         Intent intent;
         switch(item.getItemId()) {
             case R.id.nav_fav_list :
-                Toast.makeText(getApplicationContext(),"Lista Favorite", Toast.LENGTH_LONG).show();
-                drawerLayout.closeDrawer(GravityCompat.START);
-                intent = new Intent(this, FavoritesListActivity.class);
-                startActivity(intent);
+                if (favListBook.size() == 0) {
+                    Toast.makeText(CategoriesActivity.this, "The favorite list is empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Lista Favorite", Toast.LENGTH_LONG).show();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    intent = new Intent(this, FavoritesListActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.nav_shopping_cart :
-                Toast.makeText(getApplicationContext(),"Lista Cumparaturi", Toast.LENGTH_LONG).show();
-                drawerLayout.closeDrawer(GravityCompat.START);
-                intent = new Intent(this, ShoppingCartActivity.class);
-                startActivity(intent);
+                if (shoppingList.size() == 0) {
+                    Toast.makeText(CategoriesActivity.this, "The shopping cart is empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Lista Cumparaturi", Toast.LENGTH_LONG).show();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    intent = new Intent(this, ShoppingCartActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.nav_settings :
                 Toast.makeText(getApplicationContext(),"Setari", Toast.LENGTH_LONG).show();
@@ -143,11 +163,16 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
             case R.id.nav_logout :
                 Toast.makeText(getApplicationContext(),"Logout", Toast.LENGTH_LONG).show();
                 drawerLayout.closeDrawer(GravityCompat.START);
+                intent = new Intent(CategoriesActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
 
         return true;
     }
 
-
+    @Override
+    public void onBackPressed() {
+    }
 }
