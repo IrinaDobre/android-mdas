@@ -13,18 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MDASProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CartDetailsActivity"/>
+        <activity android:name=".CardDetailsActivity"></activity>
+        <activity android:name=".CartDetailsActivity" />
         <activity android:name=".FavoritesListActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ShoppingCartActivity" />
         <activity android:name=".BookDetailsActivity" />
         <activity android:name=".CategoryBooksActivity" />
-        <activity android:name=".CategoriesActivity"/>
-
-             <activity android:name=".RegisterActivity" />
-             <activity android:name=".LoginActivity">
+        <activity android:name=".CategoriesActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

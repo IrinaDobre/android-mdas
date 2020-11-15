@@ -72,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.code() == 200) {
                     user.setUsername(email);
-                    user.setName(response.body().getName());
                     user.setAddress(response.body().getAddress());
+                    user.setName(response.body().getName());
                     getUserShoppingItems(email);
                     getUserFavoriteItems(email);
                     Intent intent = new Intent(LoginActivity.this, CategoriesActivity.class);

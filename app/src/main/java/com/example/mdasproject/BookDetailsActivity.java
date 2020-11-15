@@ -140,8 +140,8 @@ public class BookDetailsActivity extends AppCompatActivity {
             }
 
 
-
     }
+
 
     public void addShoopingItem(ShoppingCartItem shoppingCartItem){
         Call<ShoppingCartItem> call = retrofitClient.addShoppingCartItem(LoginActivity.user.getUsername(), shoppingCartItem);
