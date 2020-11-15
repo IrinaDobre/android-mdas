@@ -15,6 +15,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import static com.example.mdasproject.classes.User.shoppingList;
+
 public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private CardView historyCard, artCard, scienceCard, scifiCard, businessCard,
             biographyCard, travelCard, medicalCard;
@@ -132,16 +134,24 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         Intent intent;
         switch(item.getItemId()) {
             case R.id.nav_fav_list :
-                Toast.makeText(getApplicationContext(),"Lista Favorite", Toast.LENGTH_LONG).show();
-                drawerLayout.closeDrawer(GravityCompat.START);
-                intent = new Intent(this, FavoritesListActivity.class);
-                startActivity(intent);
+                if (shoppingList.size() == 0) {
+                    Toast.makeText(CategoriesActivity.this, "The favorite list is empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Lista Favorite", Toast.LENGTH_LONG).show();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    intent = new Intent(this, FavoritesListActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.nav_shopping_cart :
-                Toast.makeText(getApplicationContext(),"Lista Cumparaturi", Toast.LENGTH_LONG).show();
-                drawerLayout.closeDrawer(GravityCompat.START);
-                intent = new Intent(this, ShoppingCartActivity.class);
-                startActivity(intent);
+                if (shoppingList.size() == 0) {
+                    Toast.makeText(CategoriesActivity.this, "The shopping cart is empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Lista Cumparaturi", Toast.LENGTH_LONG).show();
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    intent = new Intent(this, ShoppingCartActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.nav_settings :
                 Toast.makeText(getApplicationContext(),"Setari", Toast.LENGTH_LONG).show();

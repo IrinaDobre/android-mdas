@@ -45,12 +45,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
         recyclerView.setAdapter(shoppingCartAdapter);
 
         buttonPayment.setOnClickListener(v -> {
-            if (shoppingList.size() == 0) {
-                Toast.makeText(ShoppingCartActivity.this, "The shopping cart is empty", Toast.LENGTH_SHORT).show();
-            } else {
-                Intent intent = new Intent(this, CartDetailsActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(this, CartDetailsActivity.class);
+            startActivity(intent);
         });
 
     }
