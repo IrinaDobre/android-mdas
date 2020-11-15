@@ -99,6 +99,7 @@ public class SettingsActivity extends AppCompatActivity {
                     LoginActivity.user.setName(response.body().getName());
                     LoginActivity.user.setAddress(response.body().getAddress());
                     LoginActivity.user.setUsername(response.body().getUsername());
+                    finish();
                 }
             }
             @Override

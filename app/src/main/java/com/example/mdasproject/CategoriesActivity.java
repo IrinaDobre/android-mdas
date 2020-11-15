@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import static com.example.mdasproject.classes.User.favListBook;
 import static com.example.mdasproject.classes.User.shoppingList;
 
 public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
@@ -134,7 +135,7 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
         Intent intent;
         switch(item.getItemId()) {
             case R.id.nav_fav_list :
-                if (shoppingList.size() == 0) {
+                if (favListBook.size() == 0) {
                     Toast.makeText(CategoriesActivity.this, "The favorite list is empty", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Lista Favorite", Toast.LENGTH_LONG).show();
@@ -162,11 +163,16 @@ public class CategoriesActivity extends AppCompatActivity implements View.OnClic
             case R.id.nav_logout :
                 Toast.makeText(getApplicationContext(),"Logout", Toast.LENGTH_LONG).show();
                 drawerLayout.closeDrawer(GravityCompat.START);
+                intent = new Intent(CategoriesActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
 
         return true;
     }
 
-
+    @Override
+    public void onBackPressed() {
+    }
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mdasproject.classes.ShoppingCartItem;
+import com.example.mdasproject.classes.User;
 
 public class CartDetailsActivity extends AppCompatActivity {
 
