@@ -7,10 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.example.mdasproject.adapters.RecyclerViewAdapter;
-import com.example.mdasproject.classes.Book;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.mdasproject.classes.User;
 
 public class FavoritesListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -24,7 +21,7 @@ public class FavoritesListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewFavoritesList);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        booksAdapter = new RecyclerViewAdapter(this, User.favListBook);
+        booksAdapter = new RecyclerViewAdapter(this, User.favListBook, 0);
         recyclerView.setAdapter(booksAdapter);
     }
 }

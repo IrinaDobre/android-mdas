@@ -2,11 +2,12 @@ package com.example.mdasproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.mdasproject.classes.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,11 +20,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SettingsActivity extends AppCompatActivity {
     private EditText etEmail;
-    private EditText etPassword;
-    private EditText etConfirmPassword;
     private EditText etName;
     private EditText etAdress;
     private Button btnDone;
+    private RetrofitClient retrofitClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +31,20 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
         initData();
 
+        etAdress.setText(LoginActivity.user.getAddress());
+        etName.setText(LoginActivity.user.getName());
+        etEmail.setText(LoginActivity.user.getUsername());
+
+
         btnDone.setOnClickListener(view -> {
             if (validate()) {
-                updateUser();
+                getUserInfo();
             }
         });
     }
 
     public void initData() {
         etEmail = findViewById(R.id.editTextEmailAddressSettings);
-        etPassword = findViewById(R.id.editTextPasswordSettings);
-        etConfirmPassword = findViewById(R.id.editTextConfirmPasswordSettings);
         etName = findViewById(R.id.editTextNameSettings);
         etAdress = findViewById(R.id.editTextAdressSettings);
         btnDone = findViewById(R.id.buttonUpdateSettings);
@@ -55,19 +58,6 @@ public class SettingsActivity extends AppCompatActivity {
             etEmail.setError("Please insert your email");
         } else {
             etEmail.setError(null);
-        }
-        if (etPassword.getText().toString().trim().isEmpty()) {
-            etPassword.setError("Please insert your password");
-        } else {
-            etPassword.setError(null);
-        }
-        if(etConfirmPassword.getText().toString().trim().isEmpty()) {
-            etConfirmPassword.setError("Please confirm your password");
-        } else if (!(etConfirmPassword.getText().toString().equals(etPassword.getText().toString()))) {
-            etConfirmPassword.setError("Password doesn't match");
-            etConfirmPassword.setText("");
-        } else {
-            etConfirmPassword.setError(null);
         }
         if (etName.getText().toString().trim().isEmpty()) {
             etName.setError("Please insert yout name");
@@ -91,12 +81,30 @@ public class SettingsActivity extends AppCompatActivity {
         return matcher.find();
     }
 
-    private void updateUser() {
+    public void getUserInfo() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8081/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        retrofitClient = retrofit.create(RetrofitClient.class);
         User user = new User();
         user.setUsername(etEmail.getText().toString());
-        user.setName(etName.getText().toString());
-        user.setPassword(etPassword.getText().toString());
         user.setAddress(etAdress.getText().toString());
-
+        user.setName(etName.getText().toString());
+        Call<User> call = retrofitClient.updateUserInfo(LoginActivity.user.getUsername(), user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 200) {
+                    LoginActivity.user.setName(response.body().getName());
+                    LoginActivity.user.setAddress(response.body().getAddress());
+                    LoginActivity.user.setUsername(response.body().getUsername());
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

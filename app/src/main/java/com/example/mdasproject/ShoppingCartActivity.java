@@ -7,17 +7,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
-import android.view.View;
 
-import com.example.mdasproject.adapters.RecyclerViewAdapter;
 import com.example.mdasproject.adapters.ShoppingCartAdapter;
-import com.example.mdasproject.classes.Book;
 import com.example.mdasproject.classes.ShoppingCartItem;
+import com.example.mdasproject.classes.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,6 +21,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.example.mdasproject.classes.User.shoppingList;
 
 public class ShoppingCartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -43,12 +41,16 @@ public class ShoppingCartActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        shoppingCartAdapter = new ShoppingCartAdapter(this, User.shoppingList);
+        shoppingCartAdapter = new ShoppingCartAdapter(this, shoppingList);
         recyclerView.setAdapter(shoppingCartAdapter);
 
         buttonPayment.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CartDetailsActivity.class);
-            startActivity(intent);
+            if (shoppingList.size() == 0) {
+                Toast.makeText(ShoppingCartActivity.this, "The shopping cart is empty", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent intent = new Intent(this, CartDetailsActivity.class);
+                startActivity(intent);
+            }
         });
 
     }
@@ -67,7 +69,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         retrofitClient = retrofit.create(RetrofitClient.class);
-        Call<List<ShoppingCartItem>> call = retrofitClient.updateShoppingItemList(LoginActivity.user.getUsername(),User.shoppingList);
+        Call<List<ShoppingCartItem>> call = retrofitClient.updateShoppingItemList(LoginActivity.user.getUsername(), shoppingList);
         call.enqueue(new Callback<List<ShoppingCartItem>>() {
             @Override
             public void onResponse(Call<List<ShoppingCartItem>> call, Response<List<ShoppingCartItem>> response) {

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -36,13 +37,16 @@ public class CategoryBooksActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter booksAdapter;
     private ProgressBar progressBar;
+    private ImageView deleteFavItem;
     String pressed;
+    int isDeleteButtonVisible;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_books);
 
+        deleteFavItem = findViewById(R.id.imgDeleteFavoriteItem);
         progressBar = findViewById(R.id.loadingIndicator);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -51,12 +55,13 @@ public class CategoryBooksActivity extends AppCompatActivity {
         recyclerView.setAdapter(booksAdapter);
 
         pressed = getIntent().getExtras().getString("pressedCategory");
+        isDeleteButtonVisible = getIntent().getExtras().getInt("dontShowDeleteButton", 0);
         Log.d("PRESSED RECEIVED", pressed);
 
         getSupportActionBar().setTitle(pressed.toUpperCase());
 
 
-        new FetchBooks().execute(pressed);
+        new FetchBooks(isDeleteButtonVisible).execute(pressed);
 
     }
 
@@ -67,8 +72,9 @@ public class CategoryBooksActivity extends AppCompatActivity {
 
     public class FetchBooks extends AsyncTask<String, Void, String> {
 //    List<Book> categoryBooks = new ArrayList<>();
-
-        public FetchBooks() {
+        int isDeleteButtonVisible;
+        public FetchBooks(int isDeleteButtonVisible) {
+            this.isDeleteButtonVisible = isDeleteButtonVisible;
         }
 
         @Override
@@ -179,7 +185,7 @@ public class CategoryBooksActivity extends AppCompatActivity {
 
 
                     progressBar.setVisibility(View.GONE);
-                    booksAdapter = new RecyclerViewAdapter(CategoryBooksActivity.this, categoryBooks);
+                    booksAdapter = new RecyclerViewAdapter(CategoryBooksActivity.this, categoryBooks,isDeleteButtonVisible);
                     recyclerView.setAdapter(booksAdapter);
 
 
