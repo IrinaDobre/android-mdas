@@ -16,6 +16,27 @@ public class User {
     public static List<ShoppingCartItem> shoppingList = new ArrayList<>();
     public static List<Book> favListBook = new ArrayList<>();
 
+
+    public void addBookFavList(Book favBook) {
+        User.favListBook.add(favBook);
+    }
+
+   public int getFavListSize(){
+        return User.favListBook.size();
+   }
+
+    public void addBookShoppingList(ShoppingCartItem item) {
+        User.shoppingList.add(item);
+    }
+
+   public double getShoppingCartTotalPrice(){
+        double totalPrice = 0.0;
+        for(ShoppingCartItem item : User.shoppingList){
+            totalPrice += item.getTotalPrice();
+        }
+        return totalPrice;
+   }
+
     public int getId() {
         return id;
     }

@@ -54,6 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                     etEmail.setError("Please enter a valid email format");
                 }
             }
+//            Intent intent = new Intent(LoginActivity.this, CategoriesActivity.class);
+//            startActivity(intent);
         });
 
         btnCreateAccount.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
