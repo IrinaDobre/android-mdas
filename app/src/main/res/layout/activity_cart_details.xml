@@ -126,6 +126,12 @@
                         android:textSize="20sp"
                         android:textStyle="bold|italic" />
 
+                    <EditText
+                        android:id="@+id/editTextCardType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Insert CARD TYPE" />
+
                     <Button
                         android:id="@+id/buttonCardDetails"
                         android:layout_width="wrap_content"

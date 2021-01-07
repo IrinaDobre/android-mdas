@@ -2,6 +2,7 @@ package com.example.mdasproject;
 
 import com.example.mdasproject.classes.Book;
 import com.example.mdasproject.classes.ShoppingCartItem;
+import com.example.mdasproject.classes.User;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mdasproject.classes.Card;
 import com.example.mdasproject.classes.ShoppingCartItem;
 import com.example.mdasproject.classes.User;
+import com.example.mdasproject.proxy.CardProxy;
+import com.example.mdasproject.proxy.ICard;
 
 public class CartDetailsActivity extends AppCompatActivity {
 
@@ -19,6 +23,7 @@ public class CartDetailsActivity extends AppCompatActivity {
     private TextView tvTotalPriceToPay;
     private Button btnInsertDetailsCard;
     private Button btnProcessPayment;
+    private EditText etCardType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +36,15 @@ public class CartDetailsActivity extends AppCompatActivity {
         });
 
         btnInsertDetailsCard.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CardDetailsActivity.class);
-            startActivity(intent);
+            ICard cardProxy = new CardProxy(new Card());
+            cardProxy.selectCard(etCardType.getText().toString());
+            if (CardProxy.flagCardAccepted) {
+                Intent intent = new Intent(this, CardDetailsActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "The type of selected card is not supported by this application!", Toast.LENGTH_LONG).show();
+            }
+
         });
     }
 
@@ -42,6 +54,7 @@ public class CartDetailsActivity extends AppCompatActivity {
         tvTotalPriceToPay = findViewById(R.id.totalPriceToPay);
         btnInsertDetailsCard = findViewById(R.id.buttonCardDetails);
         btnProcessPayment = findViewById(R.id.buttonProcessPayment);
+        etCardType = findViewById(R.id.editTextCardType);
 
         tvInvoiceName.setText(LoginActivity.user.getName());
         tvInvoiceAdress.setText(LoginActivity.user.getAddress());
