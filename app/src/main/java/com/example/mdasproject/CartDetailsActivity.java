@@ -27,6 +27,7 @@ public class CartDetailsActivity extends AppCompatActivity {
     private Button btnProcessPayment;
     private EditText etCardType;
     private RadioGroup radioGroup;
+    private RadioButton radioButtonDeny;
     private TextView chosenOptions;
     public static String result = "";
 
@@ -63,6 +64,7 @@ public class CartDetailsActivity extends AppCompatActivity {
         etCardType = findViewById(R.id.editTextCardType);
         radioGroup = findViewById(R.id.radioGroupWrapper);
         chosenOptions = findViewById(R.id.chosenOptions);
+        radioButtonDeny = findViewById(R.id.radioNo);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -73,6 +75,7 @@ public class CartDetailsActivity extends AppCompatActivity {
                     Intent intent = new Intent(CartDetailsActivity.this, CustomPackageActivity.class);
                     startActivity(intent);
                 }
+                else chosenOptions.setText("");
             }
         });
 
@@ -92,8 +95,17 @@ public class CartDetailsActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onResume() {
-        chosenOptions.setText(result);
+        if(result.equals("")){
+            radioButtonDeny.setChecked(true);
+        }
+        else chosenOptions.setText(result);
 
         super.onResume();
     }

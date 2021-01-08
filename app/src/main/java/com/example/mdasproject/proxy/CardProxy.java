@@ -1,6 +1,6 @@
 package com.example.mdasproject.proxy;
 
-import com.example.mdasproject.classes.Card;
+import com.example.mdasproject.models.Card;
 
 public class CardProxy implements ICard {
 

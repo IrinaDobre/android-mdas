@@ -157,13 +157,14 @@
         </GridLayout>
 
         <Button
-            android:id="@+id/buttonProcessPayment"
+            android:id="@+id/buttonAddOrder"
             android:layout_width="199dp"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:onClick="applyPackage"
             android:backgroundTint="#AF6DD8"
+            android:enabled="false"
             android:text="Add to your order" />
 
 
