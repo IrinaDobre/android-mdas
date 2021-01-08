@@ -4,15 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.mdasproject.classes.Card;
-import com.example.mdasproject.classes.ShoppingCartItem;
-import com.example.mdasproject.classes.User;
+import com.example.mdasproject.models.Card;
+import com.example.mdasproject.models.ShoppingCartItem;
+import com.example.mdasproject.models.User;
 import com.example.mdasproject.proxy.CardProxy;
 import com.example.mdasproject.proxy.ICard;
 
@@ -24,6 +26,9 @@ public class CartDetailsActivity extends AppCompatActivity {
     private Button btnInsertDetailsCard;
     private Button btnProcessPayment;
     private EditText etCardType;
+    private RadioGroup radioGroup;
+    private TextView chosenOptions;
+    public static String result = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class CartDetailsActivity extends AppCompatActivity {
 
         btnProcessPayment.setOnClickListener(v -> {
             Toast.makeText(getApplicationContext(),"The payment was processed!", Toast.LENGTH_LONG).show();
+            result = "";
         });
 
         btnInsertDetailsCard.setOnClickListener(v -> {
@@ -55,6 +61,20 @@ public class CartDetailsActivity extends AppCompatActivity {
         btnInsertDetailsCard = findViewById(R.id.buttonCardDetails);
         btnProcessPayment = findViewById(R.id.buttonProcessPayment);
         etCardType = findViewById(R.id.editTextCardType);
+        radioGroup = findViewById(R.id.radioGroupWrapper);
+        chosenOptions = findViewById(R.id.chosenOptions);
+
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                Log.d("IDRB", String.valueOf(i));
+                RadioButton rb = (RadioButton) radioGroup.findViewById(i);
+                if(rb.getText().toString().equals("Yes")){
+                    Intent intent = new Intent(CartDetailsActivity.this, CustomPackageActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
 
         tvInvoiceName.setText(LoginActivity.user.getName());
         tvInvoiceAdress.setText(LoginActivity.user.getAddress());
@@ -64,4 +84,19 @@ public class CartDetailsActivity extends AppCompatActivity {
         }
         tvTotalPriceToPay.setText(Double.toString(totalPrice));
     }
+
+    @Override
+    protected void onPause() {
+        result="";
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        chosenOptions.setText(result);
+
+        super.onResume();
+    }
+
+
 }

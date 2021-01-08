@@ -8,9 +8,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.mdasproject.classes.Book;
-import com.example.mdasproject.classes.ShoppingCartItem;
-import com.example.mdasproject.classes.User;
+import com.example.mdasproject.models.Book;
+import com.example.mdasproject.models.ShoppingCartItem;
+import com.example.mdasproject.models.User;
 
 import java.util.List;
 
@@ -48,12 +48,13 @@ public class LoginActivity extends AppCompatActivity {
                             .build();
                     retrofitClient = retrofit.create(RetrofitClient.class);
                     authenticateUser();
+                    Intent intent = new Intent(LoginActivity.this, CategoriesActivity.class);
+                    startActivity(intent);
                 } else {
                     etEmail.setError("Please enter a valid email format");
                 }
             }
-//            Intent intent = new Intent(LoginActivity.this, CategoriesActivity.class);
-//            startActivity(intent);
+
         });
 
         btnCreateAccount.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));

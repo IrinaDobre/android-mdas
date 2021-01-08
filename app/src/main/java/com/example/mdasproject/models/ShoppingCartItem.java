@@ -1,4 +1,4 @@
-package com.example.mdasproject.classes;
+package com.example.mdasproject.models;
 
 public class ShoppingCartItem {
     private double initialPrice;

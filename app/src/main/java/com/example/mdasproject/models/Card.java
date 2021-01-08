@@ -1,4 +1,4 @@
-package com.example.mdasproject.classes;
+package com.example.mdasproject.models;
 
 import com.example.mdasproject.proxy.CardProxy;
 import com.example.mdasproject.proxy.ICard;

@@ -20,8 +20,8 @@ import android.widget.Toast;
 //import com.android.volley.VolleyError;
 //import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.mdasproject.adapters.RecyclerViewAdapter;
-import com.example.mdasproject.classes.Book;
-import com.example.mdasproject.classes.NetworkUtils;
+import com.example.mdasproject.models.Book;
+import com.example.mdasproject.models.NetworkUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -180,8 +180,15 @@ public class CategoryBooksActivity extends AppCompatActivity {
                         url = volumeInfo.getString("infoLink");
                     }
 
-                    categoryBooks.add(new Book(title, author, publishedDate, description,
-                            categories, thumbnail, buy, previewLink, price, pageCount, url));
+
+                    categoryBooks.add(new Book.Builder(title,author,publishedDate,description,price,thumbnail)
+                    .setBuy(buy)
+                    .setCategories(categories)
+                    .setPageCount(pageCount)
+                    .setPreview(previewLink)
+                    .setUrl(url).build());
+//                            new Book(title, author, publishedDate, description,
+//                            categories, thumbnail, buy, previewLink, price, pageCount, url));
 
 
                     progressBar.setVisibility(View.GONE);

@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.mdasproject.classes.Book;
-import com.example.mdasproject.classes.ShoppingCartItem;
-import com.example.mdasproject.classes.User;
+import com.example.mdasproject.models.Book;
+import com.example.mdasproject.models.ShoppingCartItem;
+import com.example.mdasproject.models.User;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -22,7 +22,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
 
 public class BookDetailsActivity extends AppCompatActivity {
     FloatingActionButton favFAB;
@@ -94,13 +93,18 @@ public class BookDetailsActivity extends AppCompatActivity {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     retrofitClient = retrofit.create(RetrofitClient.class);
-                    Book favBook = new Book();
-                    favBook.setAuthors(tvAuthors.getText().toString());
-                    favBook.setTitle(collapsingToolbarLayout.getTitle().toString());
-                    favBook.setDescription(tvDesc.getText().toString());
-                    favBook.setPublishedDate(tvPublishDate.getText().toString());
-                    favBook.setPrice(tvPrice.getText().toString());
-                    favBook.setThumbnail(finalThumbnail);
+                    //builder aici
+                    Book favBook = new Book.Builder(collapsingToolbarLayout.getTitle().toString(),
+                            tvAuthors.getText().toString(),tvPublishDate.getText().toString(),
+                            tvDesc.getText().toString(), tvPrice.getText().toString(),
+                            finalThumbnail).build();
+
+//                    favBook.setAuthors(tvAuthors.getText().toString());
+//                    favBook.setTitle(collapsingToolbarLayout.getTitle().toString());
+//                    favBook.setDescription(tvDesc.getText().toString());
+//                    favBook.setPublishedDate(tvPublishDate.getText().toString());
+//                    favBook.setPrice(tvPrice.getText().toString());
+//                    favBook.setThumbnail(finalThumbnail);
                     addFavoriteItem(favBook);
                     User.favListBook.add(favBook);
                     Toast.makeText(getApplicationContext(), "The book was added to your 'Favorites List'", Toast.LENGTH_SHORT).show();

@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MDASProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CardDetailsActivity"></activity>
+        <activity android:name=".CustomPackageActivity"></activity>
+        <activity android:name=".CardDetailsActivity" />
         <activity android:name=".CartDetailsActivity" />
         <activity android:name=".FavoritesListActivity" />
         <activity android:name=".SettingsActivity" />

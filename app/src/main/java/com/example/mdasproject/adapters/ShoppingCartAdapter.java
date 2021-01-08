@@ -18,7 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.mdasproject.LoginActivity;
 import com.example.mdasproject.R;
 import com.example.mdasproject.RetrofitClient;
-import com.example.mdasproject.classes.ShoppingCartItem;
+import com.example.mdasproject.models.ShoppingCartItem;
 
 import java.util.ArrayList;
 import java.util.List;

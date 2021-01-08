@@ -10,8 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.mdasproject.adapters.ShoppingCartAdapter;
-import com.example.mdasproject.classes.ShoppingCartItem;
-import com.example.mdasproject.classes.User;
+import com.example.mdasproject.models.ShoppingCartItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -22,7 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.mdasproject.classes.User.shoppingList;
+import static com.example.mdasproject.models.User.shoppingList;
 
 public class ShoppingCartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;

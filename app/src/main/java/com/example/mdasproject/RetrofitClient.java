@@ -1,8 +1,8 @@
 package com.example.mdasproject;
 
-import com.example.mdasproject.classes.Book;
-import com.example.mdasproject.classes.ShoppingCartItem;
-import com.example.mdasproject.classes.User;
+import com.example.mdasproject.models.Book;
+import com.example.mdasproject.models.ShoppingCartItem;
+import com.example.mdasproject.models.User;
 
 import java.util.List;
 

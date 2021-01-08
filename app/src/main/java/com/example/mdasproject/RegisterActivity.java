@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.mdasproject.classes.User;
+import com.example.mdasproject.models.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

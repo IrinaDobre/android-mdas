@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MDASProject</string>
+    <string name="app_name">MPAIProject</string>
     <string name="label_email">Email</string>
     <string name="label_password">Password</string>
     <string name="button_login">Login</string>

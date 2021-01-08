@@ -24,7 +24,7 @@ import com.example.mdasproject.FavoritesListActivity;
 import com.example.mdasproject.LoginActivity;
 import com.example.mdasproject.R;
 import com.example.mdasproject.RetrofitClient;
-import com.example.mdasproject.classes.Book;
+import com.example.mdasproject.models.Book;
 
 import java.util.ArrayList;
 import java.util.Collection;

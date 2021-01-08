@@ -15,8 +15,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-import static com.example.mdasproject.classes.User.favListBook;
-import static com.example.mdasproject.classes.User.shoppingList;
+import static com.example.mdasproject.models.User.favListBook;
+import static com.example.mdasproject.models.User.shoppingList;
 
 public class CategoriesActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
     private CardView historyCard, artCard, scienceCard, scifiCard, businessCard,

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CartDetailsActivity">
+    android:layout_height="wrap_content"
+    android:background="@drawable/back"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/back"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,11 +45,11 @@
 
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="520dp"
+            android:layout_height="720dp"
             android:alignmentMode="alignMargins"
             android:columnCount="1"
             android:columnOrderPreserved="false"
-            android:rowCount="3">
+            android:rowCount="4">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/historyCard"
@@ -144,6 +143,68 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/giftCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Add a customized wrapper?"
+                        android:textColor="#6f6f6f"
+                        android:textSize="20sp"
+                        android:textStyle="bold|italic" />
+
+                    <RadioGroup
+                        android:id="@+id/radioGroupWrapper"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                    <RadioButton
+                        android:id="@+id/radioYes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="30dp"
+                        android:text="Yes" />
+
+                    <RadioButton
+                        android:id="@+id/radioNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="No" />
+                    </RadioGroup>
+
+                    <TextView
+                        android:id="@+id/chosenOptions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:gravity="center"
+                        android:textColor="#6f6f6f"
+                        android:textSize="17sp"
+                        android:textStyle="italic" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/scienceCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -187,11 +248,11 @@
             android:id="@+id/buttonProcessPayment"
             android:layout_width="199dp"
             android:layout_height="60dp"
-            android:layout_marginLeft="110dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
             android:backgroundTint="#AF6DD8"
             android:text="Process payment" />
 
 
     </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

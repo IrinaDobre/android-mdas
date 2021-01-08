@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mdasproject.adapters.RecyclerViewAdapter;
-import com.example.mdasproject.classes.Book;
-import com.example.mdasproject.classes.User;
+import com.example.mdasproject.models.Book;
+import com.example.mdasproject.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -22,10 +22,13 @@ public class FavoritesListActivity extends AppCompatActivity {
     private RecyclerViewAdapter booksAdapter;
     private FloatingActionButton btnShareList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites_list);
+
+        getSupportActionBar().setTitle("Favorites");
 
         btnShareList = findViewById(R.id.buttonShare);
         recyclerView = findViewById(R.id.recyclerViewFavoritesList);

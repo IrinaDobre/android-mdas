@@ -1,13 +1,9 @@
-package com.example.mdasproject.classes;
-
-import com.example.mdasproject.classes.Book;
-import com.example.mdasproject.classes.ShoppingCartItem;
+package com.example.mdasproject.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-
     private int id;
     private String username;
     private String password;
@@ -16,12 +12,13 @@ public class User {
     public static List<ShoppingCartItem> shoppingList = new ArrayList<>();
     public static List<Book> favListBook = new ArrayList<>();
 
+    public User() {}
 
     public void addBookFavList(Book favBook) {
         User.favListBook.add(favBook);
     }
 
-   public int getFavListSize(){
+    public int getFavListSize(){
         return User.favListBook.size();
    }
 

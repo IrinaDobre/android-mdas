@@ -1,4 +1,4 @@
-package com.example.mdasproject.classes;
+package com.example.mdasproject.models;
 
 import android.net.Uri;
 import android.util.Log;
