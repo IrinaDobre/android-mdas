@@ -48,8 +48,6 @@ public class LoginActivity extends AppCompatActivity {
                             .build();
                     retrofitClient = retrofit.create(RetrofitClient.class);
                     authenticateUser();
-                    Intent intent = new Intent(LoginActivity.this, CategoriesActivity.class);
-                    startActivity(intent);
                 } else {
                     etEmail.setError("Please enter a valid email format");
                 }

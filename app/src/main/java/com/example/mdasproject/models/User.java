@@ -1,5 +1,7 @@
 package com.example.mdasproject.models;
 
+import com.example.mdasproject.strategy.PaymentStrategy;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ public class User {
     private String password;
     private String name;
     private String address;
+    public static PaymentStrategy playmentMethod;
     public static List<ShoppingCartItem> shoppingList = new ArrayList<>();
     public static List<Book> favListBook = new ArrayList<>();
 
@@ -33,6 +36,14 @@ public class User {
         }
         return totalPrice;
    }
+
+    public static void setPlaymentMethod(PaymentStrategy playmentMethod) {
+        User.playmentMethod = playmentMethod;
+    }
+
+    public static String pay() {
+        return playmentMethod.getTypeOfPayment();
+    }
 
     public int getId() {
         return id;
