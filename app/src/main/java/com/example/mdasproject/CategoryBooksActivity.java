@@ -181,7 +181,7 @@ public class CategoryBooksActivity extends AppCompatActivity {
                     }
 
 
-                    categoryBooks.add(new Book.Builder(title,author,publishedDate,description,price,thumbnail)
+                    categoryBooks.add(new Book.BookBuilder(title,author,publishedDate,description,price,thumbnail)
                     .setBuy(buy)
                     .setCategories(categories)
                     .setPageCount(pageCount)

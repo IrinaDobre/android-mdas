@@ -94,7 +94,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                             .build();
                     retrofitClient = retrofit.create(RetrofitClient.class);
                     //builder aici
-                    Book favBook = new Book.Builder(collapsingToolbarLayout.getTitle().toString(),
+                    Book favBook = new Book.BookBuilder(collapsingToolbarLayout.getTitle().toString(),
                             tvAuthors.getText().toString(),tvPublishDate.getText().toString(),
                             tvDesc.getText().toString(), tvPrice.getText().toString(),
                             finalThumbnail).build();

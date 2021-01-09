@@ -18,7 +18,7 @@ public class Book {
     private int pageCount;
     private String url;
 
-    private Book(Builder builder) {
+    private Book(BookBuilder builder) {
         this.title = builder.title;
         this.authors = builder.authors;
         this.publishedDate = builder.publishedDate;
@@ -73,7 +73,7 @@ public class Book {
                 '}';
     }
 
-    public static class Builder implements IBuilder {
+    public static class BookBuilder implements IBuilder {
         //mandatory attributes
         private String title;
         private String authors;
@@ -89,8 +89,8 @@ public class Book {
         private int pageCount;
         private String url;
 
-        public Builder(String title, String authors, String publishedDate, String description,
-                       String price, String thumbnail){
+        public BookBuilder(String title, String authors, String publishedDate, String description,
+                           String price, String thumbnail){
             super();
             this.title = title;
             this.authors = authors;
@@ -100,27 +100,27 @@ public class Book {
             this.thumbnail = thumbnail;
         }
 
-        public Builder setBuy(String buy) {
+        public BookBuilder setBuy(String buy) {
             this.buy = buy;
             return this;
         }
 
-        public Builder setPreview(String preview) {
+        public BookBuilder setPreview(String preview) {
             this.preview = preview;
             return this;
         }
 
-        public Builder setCategories(String categories) {
+        public BookBuilder setCategories(String categories) {
             this.categories = categories;
             return this;
         }
 
-        public Builder setPageCount(int pageCount) {
+        public BookBuilder setPageCount(int pageCount) {
             this.pageCount = pageCount;
             return this;
         }
 
-        public Builder setUrl(String url) {
+        public BookBuilder setUrl(String url) {
             this.url = url;
             return this;
         }
