@@ -1,5 +1,7 @@
 package com.example.mdasproject.proxy;
 
+import android.util.Log;
+
 import com.example.mdasproject.models.Card;
 
 public class CardProxy implements ICard {
@@ -15,9 +17,10 @@ public class CardProxy implements ICard {
     public void selectCard(String cardType) {
         if (cardType.equalsIgnoreCase(Card.TYPE_MASTERCARD) || cardType.equalsIgnoreCase(Card.TYPE_VISA)) {
             card.selectCard(cardType);
+            Log.d("DESIGN_PATTERN_PROXY", cardType);
         } else {
             flagCardAccepted = false;
-            System.out.println("The type of selected card is not supported by this application!");
+            Log.d("DESIGN_PATTERN_PROXY", "The type of selected card is not supported by this application!");
         }
     }
 }

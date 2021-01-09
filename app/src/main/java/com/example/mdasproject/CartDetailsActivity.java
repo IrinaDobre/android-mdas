@@ -45,6 +45,7 @@ public class CartDetailsActivity extends AppCompatActivity {
         btnInsertDetailsCard.setOnClickListener(v -> {
             ICard cardProxy = new CardProxy(new Card());
             cardProxy.selectCard(etCardType.getText().toString());
+
             if (CardProxy.flagCardAccepted) {
                 Intent intent = new Intent(this, CardDetailsActivity.class);
                 startActivity(intent);

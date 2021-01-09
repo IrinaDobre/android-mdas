@@ -187,8 +187,8 @@ public class CategoryBooksActivity extends AppCompatActivity {
                     .setPageCount(pageCount)
                     .setPreview(previewLink)
                     .setUrl(url).build());
-//                            new Book(title, author, publishedDate, description,
-//                            categories, thumbnail, buy, previewLink, price, pageCount, url));
+
+                    Log.d("DESIGN_PATTERN_BUILDER", categoryBooks.toString());
 
 
                     progressBar.setVisibility(View.GONE);

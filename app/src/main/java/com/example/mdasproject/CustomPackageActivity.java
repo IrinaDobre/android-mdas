@@ -69,19 +69,18 @@ public class CustomPackageActivity extends AppCompatActivity {
             else {
                 packageRecipient = new LoggedUser(new WrappingPaper());
             }
-            Log.d("AAA", packageRecipient.set());
             CartDetailsActivity.result = packageRecipient.set();
+            Log.d("DESIGN_PATTERN_BRIDGE", CartDetailsActivity.result);
         }
         else {
             if(pack.equals("Box")){
                 packageRecipient = new OtherRecipient(new Box());
-                Log.d("AAA", packageRecipient.set());
             }
             else {
                 packageRecipient = new OtherRecipient(new WrappingPaper());
-                Log.d("AAA", packageRecipient.set());
             }
             CartDetailsActivity.result = packageRecipient.set();
+            Log.d("DESIGN_PATTERN_BRIDGE", CartDetailsActivity.result);
         }
 
         if(!CartDetailsActivity.result.equals("")){
