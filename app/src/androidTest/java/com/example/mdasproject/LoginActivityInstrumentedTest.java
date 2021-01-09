@@ -1,12 +1,11 @@
 package com.example.mdasproject;
 
 import android.content.Context;
-import android.text.InputType;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
-import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,8 +18,7 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withInputType;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -42,8 +40,8 @@ public class LoginActivityInstrumentedTest {
     @Test
     public void userCanEnterLoginData(){
         ActivityScenario scenario = rule.getScenario();
-        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("username"), closeSoftKeyboard());
-        onView(withId(R.id.editTextTextPassword)).perform(typeText("password"), closeSoftKeyboard());
+        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("d@gmai.com"), closeSoftKeyboard());
+        onView(withId(R.id.editTextTextPassword)).perform(typeText("1"), closeSoftKeyboard());
     }
 
     @Test
@@ -55,8 +53,8 @@ public class LoginActivityInstrumentedTest {
     @Test
     public void performLogin(){
         ActivityScenario scenario = rule.getScenario();
-        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("username"), closeSoftKeyboard());
-        onView(withId(R.id.editTextTextPassword)).perform(typeText("password"), closeSoftKeyboard());
+        onView(withId(R.id.editTextTextEmailAddress)).perform(typeText("d@gmai.com"), closeSoftKeyboard());
+        onView(withId(R.id.editTextTextPassword)).perform(typeText("1"), closeSoftKeyboard());
         onView(withId(R.id.buttonLogin)).perform(click());
     }
 

@@ -1,13 +1,12 @@
 package com.example.mdasproject;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mdasproject.adapters.ShoppingCartAdapter;
 import com.example.mdasproject.models.ShoppingCartItem;
@@ -22,7 +21,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.mdasproject.models.User.shoppingList;
-
 public class ShoppingCartActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ShoppingCartAdapter shoppingCartAdapter;
@@ -44,12 +42,15 @@ public class ShoppingCartActivity extends AppCompatActivity {
         recyclerView.setAdapter(shoppingCartAdapter);
 
         buttonPayment.setOnClickListener(v -> {
-            Intent intent = new Intent(this, CartDetailsActivity.class);
-            startActivity(intent);
+            choosePaymentMethod();
         });
 
     }
 
+    private void choosePaymentMethod() {
+        PaymentDialog paymentDialog = PaymentDialog.newInstance();
+        paymentDialog.show(getSupportFragmentManager(),"paymanetDialog");
+    }
 
     @Override
     public void onBackPressed() {
