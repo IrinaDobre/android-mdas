@@ -17,11 +17,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mdasproject.adapter.Currency;
+import com.example.mdasproject.adapter.CurrencyDollar;
+import com.example.mdasproject.adapter.CurrencyDollarAdapter;
+import com.example.mdasproject.adapter.CurrencyEuro;
 import com.example.mdasproject.models.Card;
 import com.example.mdasproject.models.ShoppingCartItem;
 import com.example.mdasproject.models.User;
 import com.example.mdasproject.proxy.CardProxy;
 import com.example.mdasproject.proxy.ICard;
+
+import java.math.BigDecimal;
 
 public class CartDetailsActivity extends AppCompatActivity {
 
@@ -34,6 +40,8 @@ public class CartDetailsActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton radioButtonDeny;
     private TextView chosenOptions;
+    private TextView tvPriceText;
+    private static double FINAL_PRICE;
     public static String result = "";
 
     @Override
@@ -70,14 +78,31 @@ public class CartDetailsActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        if (item.getItemId() == R.id.currencyEURO) {
-//            tvTotalPriceToPay.setText();
-//        }
-//
-//        return true;
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.currencyEURO) {
+            CurrencyEuro currencyEuro = new CurrencyEuro();
+            double price = Double.parseDouble(String.valueOf(FINAL_PRICE));
+            tvPriceText.setText("Total EURO to pay");
+            tvTotalPriceToPay.setText(String.valueOf(showTotalPriceToPay(currencyEuro, BigDecimal.valueOf(price))));
+        }
+        if (item.getItemId() == R.id.currencyUSD) {
+            CurrencyDollar currencyDollar = new CurrencyDollar();
+            CurrencyDollarAdapter currencyDollarAdapter = new CurrencyDollarAdapter(currencyDollar);
+            double price = Double.parseDouble(String.valueOf(FINAL_PRICE));
+            tvPriceText.setText("Total USD to pay");
+            tvTotalPriceToPay.setText(String.valueOf(showTotalPriceToPay(currencyDollarAdapter, BigDecimal.valueOf(price))));
+        }
+        if (item.getItemId() == R.id.currencyRON) {
+            tvPriceText.setText("Total RON to pay");
+            tvTotalPriceToPay.setText(String.valueOf(FINAL_PRICE));
+        }
+        return true;
+    }
+
+    private BigDecimal showTotalPriceToPay(Currency currency, BigDecimal value){
+        return currency.convertCurrency(value);
+    }
 
     private void showPayment() {
         if(User.pay().equals("CashPayment")) {
@@ -109,6 +134,8 @@ public class CartDetailsActivity extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioGroupWrapper);
         chosenOptions = findViewById(R.id.chosenOptions);
         radioButtonDeny = findViewById(R.id.radioNo);
+        tvPriceText = findViewById(R.id.tvPricetText);
+
 
         radioGroup.setOnCheckedChangeListener((RadioGroup.OnCheckedChangeListener) (radioGroup, i) -> {
             Log.d("IDRB", String.valueOf(i));
@@ -122,11 +149,16 @@ public class CartDetailsActivity extends AppCompatActivity {
 
         tvInvoiceName.setText(LoginActivity.user.getName());
         tvInvoiceAdress.setText(LoginActivity.user.getAddress());
+        FINAL_PRICE = calculateTotalPrice();
+        tvTotalPriceToPay.setText(Double.toString(FINAL_PRICE));
+    }
+
+    private double calculateTotalPrice() {
         double totalPrice = 0.0;
         for (ShoppingCartItem item : User.shoppingList) {
             totalPrice += item.getTotalPrice();
         }
-        tvTotalPriceToPay.setText(Double.toString(totalPrice));
+        return totalPrice;
     }
 
     @Override

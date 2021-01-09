@@ -6,6 +6,6 @@ import java.math.RoundingMode;
 public class CurrencyEuro implements Currency{
     @Override
     public BigDecimal convertCurrency(BigDecimal currencyValue) {
-        return currencyValue.multiply(BigDecimal.valueOf(4.87)).setScale(2, RoundingMode.FLOOR);
+        return currencyValue.divide(BigDecimal.valueOf(4.87), 2, RoundingMode.FLOOR);
     }
 }
