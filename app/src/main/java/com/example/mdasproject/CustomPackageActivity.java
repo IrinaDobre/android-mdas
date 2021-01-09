@@ -40,7 +40,6 @@ public class CustomPackageActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 RadioButton rb = radioGroupRecipient.findViewById(i);
                 recipient = rb.getText().toString();
-//                Toast.makeText(CustomPackageActivity.this,recipient,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -65,9 +64,11 @@ public class CustomPackageActivity extends AppCompatActivity {
         if(recipient.equals("Myself")){
             if(pack.equals("Box")){
                 packageRecipient = new LoggedUser(new Box());
+                CartDetailsActivity.SELECTED_TYPE_OF_PACKAGE = "Box";
             }
             else {
                 packageRecipient = new LoggedUser(new WrappingPaper());
+                CartDetailsActivity.SELECTED_TYPE_OF_PACKAGE  = "Wrapping paper";
             }
             CartDetailsActivity.result = packageRecipient.set();
             Log.d("DESIGN_PATTERN_BRIDGE", CartDetailsActivity.result);
@@ -75,18 +76,17 @@ public class CustomPackageActivity extends AppCompatActivity {
         else {
             if(pack.equals("Box")){
                 packageRecipient = new OtherRecipient(new Box());
+                CartDetailsActivity.SELECTED_TYPE_OF_PACKAGE  = "Box";
             }
             else {
                 packageRecipient = new OtherRecipient(new WrappingPaper());
+                CartDetailsActivity.SELECTED_TYPE_OF_PACKAGE  = "Wrapping paper";
             }
             CartDetailsActivity.result = packageRecipient.set();
             Log.d("DESIGN_PATTERN_BRIDGE", CartDetailsActivity.result);
         }
 
         if(!CartDetailsActivity.result.equals("")){
-//            Intent intent = new Intent(CustomPackageActivity.this, CartDetailsActivity.class);
-//            intent.putExtra("OPT_CHOSEN", result);
-//            startActivity(intent);
             finish();
         }
     }

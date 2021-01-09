@@ -21,6 +21,7 @@ import com.example.mdasproject.adapter.Currency;
 import com.example.mdasproject.adapter.CurrencyDollar;
 import com.example.mdasproject.adapter.CurrencyDollarAdapter;
 import com.example.mdasproject.adapter.CurrencyEuro;
+import com.example.mdasproject.adapter.CurrencyRon;
 import com.example.mdasproject.models.Card;
 import com.example.mdasproject.models.ShoppingCartItem;
 import com.example.mdasproject.models.User;
@@ -43,6 +44,13 @@ public class CartDetailsActivity extends AppCompatActivity {
     private TextView tvPriceText;
     private static double FINAL_PRICE;
     public static String result = "";
+    private Button btnAddExtraDecorations;
+    public static String decorationResult = "";
+    private TextView choosenDecorations;
+    public static String SELECTED_TYPE_OF_PACKAGE = "";
+    public static double extraDecorationPrice;
+    public double totalPrice;
+    public Currency selectedCurrency = new CurrencyRon();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +66,6 @@ public class CartDetailsActivity extends AppCompatActivity {
         btnInsertDetailsCard.setOnClickListener(v -> {
             ICard cardProxy = new CardProxy(new Card());
             cardProxy.selectCard(etCardType.getText().toString());
-
             if (CardProxy.flagCardAccepted) {
                 Intent intent = new Intent(this, CardDetailsActivity.class);
                 startActivity(intent);
@@ -67,7 +74,10 @@ public class CartDetailsActivity extends AppCompatActivity {
             }
         });
 
-
+        btnAddExtraDecorations.setOnClickListener(v -> {
+            ExtraDecorationsDialog decorationsDialog = ExtraDecorationsDialog.newInstance();
+            decorationsDialog.show(getSupportFragmentManager(),"extraDecorationDialog");
+        });
 
         showPayment();
     }
@@ -83,6 +93,7 @@ public class CartDetailsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.currencyEURO) {
             CurrencyEuro currencyEuro = new CurrencyEuro();
+            selectedCurrency = currencyEuro;
             double price = Double.parseDouble(String.valueOf(FINAL_PRICE));
             tvPriceText.setText("Total EURO to pay");
             tvTotalPriceToPay.setText(String.valueOf(showTotalPriceToPay(currencyEuro, BigDecimal.valueOf(price))));
@@ -90,11 +101,13 @@ public class CartDetailsActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.currencyUSD) {
             CurrencyDollar currencyDollar = new CurrencyDollar();
             CurrencyDollarAdapter currencyDollarAdapter = new CurrencyDollarAdapter(currencyDollar);
+            selectedCurrency = currencyDollarAdapter;
             double price = Double.parseDouble(String.valueOf(FINAL_PRICE));
             tvPriceText.setText("Total USD to pay");
             tvTotalPriceToPay.setText(String.valueOf(showTotalPriceToPay(currencyDollarAdapter, BigDecimal.valueOf(price))));
         }
         if (item.getItemId() == R.id.currencyRON) {
+            selectedCurrency = new CurrencyRon();
             tvPriceText.setText("Total RON to pay");
             tvTotalPriceToPay.setText(String.valueOf(FINAL_PRICE));
         }
@@ -137,6 +150,8 @@ public class CartDetailsActivity extends AppCompatActivity {
         radioButtonDeny = findViewById(R.id.radioNo);
         tvPriceText = findViewById(R.id.tvPricetText);
 
+        btnAddExtraDecorations = findViewById(R.id.btnAddExtraDecorations);
+        choosenDecorations = findViewById(R.id.choosenDecorations);
 
         radioGroup.setOnCheckedChangeListener((RadioGroup.OnCheckedChangeListener) (radioGroup, i) -> {
             Log.d("IDRB", String.valueOf(i));
@@ -145,7 +160,14 @@ public class CartDetailsActivity extends AppCompatActivity {
                 Intent intent = new Intent(CartDetailsActivity.this, CustomPackageActivity.class);
                 startActivity(intent);
             }
-            else chosenOptions.setText("");
+            else {
+                chosenOptions.setText("");
+                btnAddExtraDecorations.setVisibility(View.GONE);
+                choosenDecorations.setText("");
+                decorationResult = "";
+                FINAL_PRICE = totalPrice;
+                tvTotalPriceToPay.setText(String.valueOf(showTotalPriceToPay(selectedCurrency, BigDecimal.valueOf(FINAL_PRICE))));
+            }
         });
 
         tvInvoiceName.setText(LoginActivity.user.getName());
@@ -155,7 +177,7 @@ public class CartDetailsActivity extends AppCompatActivity {
     }
 
     private double calculateTotalPrice() {
-        double totalPrice = 0.0;
+        totalPrice = 0.0;
         for (ShoppingCartItem item : User.shoppingList) {
             totalPrice += item.getTotalPrice();
         }
@@ -170,7 +192,6 @@ public class CartDetailsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         super.onBackPressed();
     }
 
@@ -178,11 +199,28 @@ public class CartDetailsActivity extends AppCompatActivity {
     protected void onResume() {
         if(result.equals("")){
             radioButtonDeny.setChecked(true);
+            btnAddExtraDecorations.setVisibility(View.GONE);
         }
-        else chosenOptions.setText(result);
+        else {
+            chosenOptions.setText(result);
+            btnAddExtraDecorations.setVisibility(View.VISIBLE);
+        }
 
         super.onResume();
     }
 
 
+    public void actionAfterDismissDialog() {
+        if (!decorationResult.equals("")) {
+            choosenDecorations.setVisibility(View.VISIBLE);
+            choosenDecorations.setText(decorationResult);
+            tvTotalPriceToPay.setText(totalPrice + extraDecorationPrice + "");
+            FINAL_PRICE = totalPrice + extraDecorationPrice;
+            tvTotalPriceToPay.setText(String.valueOf(showTotalPriceToPay(selectedCurrency, BigDecimal.valueOf(FINAL_PRICE))));
+        } else {
+            FINAL_PRICE = totalPrice;
+            tvTotalPriceToPay.setText(String.valueOf(showTotalPriceToPay(selectedCurrency, BigDecimal.valueOf(FINAL_PRICE))));
+            choosenDecorations.setVisibility(View.GONE);
+        }
+    }
 }

@@ -13,9 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MDASProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PaymentDialog"></activity>
+        <activity android:name=".ExtraDecorationsDialog"></activity>
+        <activity android:name=".PaymentDialog" />
         <activity android:name=".CardDetailsActivity" />
-        <activity android:name=".CustomPackageActivity"></activity>
+        <activity android:name=".CustomPackageActivity" />
         <activity android:name=".CartDetailsActivity" />
         <activity android:name=".FavoritesListActivity" />
         <activity android:name=".SettingsActivity" />

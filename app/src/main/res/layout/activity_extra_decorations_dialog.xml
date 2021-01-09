@@ -2,16 +2,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".PaymentDialog">
-
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="40dp"
+    tools:context=".ExtraDecorationsDialog">
 
     <TextView
-        android:id="@+id/tvChoosePaymetType"
+        android:id="@+id/tvChooseExtraDecorations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose payment type"
+        android:text="Choose extra decoration:"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -19,51 +19,55 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
+        android:id="@+id/radioGroupDecorations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChoosePaymetType">
+        app:layout_constraintTop_toBottomOf="@+id/tvChooseExtraDecorations">
 
         <RadioButton
-            android:id="@+id/radioButtonCard"
+            android:id="@+id/radioButtonPaperBow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:checked="false"
-            android:text="Card"
+            android:text="Paper Bow"
             android:textSize="25dp" />
 
         <RadioButton
-            android:id="@+id/radioButtonCash"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.13"
-            android:checked="false"
-            android:text="Cash"
-            android:textSize="25dp" />
-
-        <RadioButton
-            android:id="@+id/radioButtonCrypto"
+            android:id="@+id/radioButtonGiftTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.13"
             android:checked="false"
-            android:text="Cryptocurrency"
+            android:text="Gift Tag"
             android:textSize="25dp" />
 
         <RadioButton
-            android:id="@+id/radioButtonMobile"
+            android:id="@+id/radioButtonGreetingCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.13"
             android:checked="false"
-            android:text="Mobile payment"
+            android:text="Greeting Card"
             android:textSize="25dp" />
+
+        <RadioButton
+            android:id="@+id/radioButtonNone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.13"
+            android:checked="false"
+            android:text="None"
+            android:textSize="25dp" />
+
     </RadioGroup>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

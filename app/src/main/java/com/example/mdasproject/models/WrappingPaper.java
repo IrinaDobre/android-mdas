@@ -7,4 +7,10 @@ public class WrappingPaper implements PackageType {
     public String apply() {
         return "wrapping paper";
     }
+
+    @Override
+    public double getPrice() {
+        return 10;
+    }
+
 }

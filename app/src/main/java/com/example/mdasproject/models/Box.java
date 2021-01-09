@@ -7,4 +7,11 @@ public class Box implements PackageType {
     public String apply() {
         return "box";
     }
+
+    @Override
+    public double getPrice() {
+        return 15;
+    }
+
+
 }

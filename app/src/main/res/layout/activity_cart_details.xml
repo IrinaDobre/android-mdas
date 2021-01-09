@@ -45,7 +45,7 @@
 
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="720dp"
+            android:layout_height="wrap_content"
             android:alignmentMode="alignMargins"
             android:columnCount="1"
             android:columnOrderPreserved="false"
@@ -196,11 +196,29 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text=""
                         android:gravity="center"
+                        android:text=""
                         android:textColor="#6f6f6f"
                         android:textSize="17sp"
                         android:textStyle="italic" />
+
+                    <TextView
+                        android:id="@+id/choosenDecorations"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#6f6f6f"
+                        android:textSize="17sp"
+                        android:textStyle="italic" />
+
+                    <Button
+                        android:id="@+id/btnAddExtraDecorations"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#AF6DD8"
+                        android:text="Add extra decorations"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
