@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mdasproject">
+    package="com.example.mpaiproject">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,19 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MDASProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ExtraDecorationsDialog"></activity>
-        <activity android:name=".PaymentDialog" />
-        <activity android:name=".CardDetailsActivity" />
-        <activity android:name=".CustomPackageActivity" />
-        <activity android:name=".CartDetailsActivity" />
-        <activity android:name=".FavoritesListActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".ShoppingCartActivity" />
-        <activity android:name=".BookDetailsActivity" />
-        <activity android:name=".CategoryBooksActivity" />
-        <activity android:name=".CategoriesActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".LoginActivity">
+
+        <activity android:name="com.example.mpaiproject.CardDetailsActivity" />
+        <activity android:name="com.example.mpaiproject.CustomPackageActivity" />
+        <activity android:name="com.example.mpaiproject.CartDetailsActivity" />
+        <activity android:name="com.example.mpaiproject.FavoritesListActivity" />
+        <activity android:name="com.example.mpaiproject.SettingsActivity" />
+        <activity android:name="com.example.mpaiproject.ShoppingCartActivity" />
+        <activity android:name="com.example.mpaiproject.BookDetailsActivity" />
+        <activity android:name="com.example.mpaiproject.CategoryBooksActivity" />
+        <activity android:name="com.example.mpaiproject.CategoriesActivity" />
+        <activity android:name="com.example.mpaiproject.RegisterActivity" />
+        <activity android:name="com.example.mpaiproject.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
